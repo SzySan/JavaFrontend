@@ -1,10 +1,33 @@
 <script setup>
+import { onMounted } from 'vue';
+// import { fetchFixtures } from '@/fetch-data';
+import { data } from '@/lib/dummy-data';
+import { RouterLink } from 'vue-router';
+import { useRoute } from 'vue-router';
+
+
+const route = useRoute();
+
+
+
+
 defineProps({
   msg: {
     type: String,
     required: true
   }
-})
+});
+
+
+
+// const fetchData = async () => {
+//     const fixtures = await fetchFixtures();
+//     console.log(fixtures);
+//   };
+
+//   onMounted(() => {
+//     fetchData();
+//   });
 </script>
 
 <template>
@@ -55,6 +78,32 @@ defineProps({
         <div class="feature">
           <div class="feature-display">
               <span>WYNIKI</span>
+              <div class="fixture-table">
+                <div v-for="fixture in data.response" :key="fixture.id" class="fixture">
+                  <RouterLink :to="`/mecz/${fixture.fixture.id}`" :key="fixture.fixture.id">
+                  <div class="fixture-examples">
+                    <div style="align-items: center;">
+                      <img :src="fixture.league.logo" style="width: 30px;" :alt="fixture.league.name" />
+                      {{fixture.league.name}}
+                    </div>
+                    <div>
+                      {{ fixture.fixture.status.long }}
+                    </div>
+                    <div>
+                      <img :src="fixture.teams.home.logo" style="width: 30px;" :alt="fixture.teams.home.logo" />
+                      {{ fixture.teams.home.name }}
+                      {{ fixture.goals.home }} : {{ fixture.goals.away }}
+                      <img :src="fixture.teams.away.logo" style="width: 30px;":alt="fixture.teams.away.logo" />
+                      {{ fixture.teams.away.name }}
+                    </div>
+                    <div style="color: green;">
+                      {{ fixture.fixture.status.elapsed }} min 
+                    </div>
+                  </div>
+                </RouterLink>
+                </div>
+              </div>
+              
           </div>
         </div>
       </div>
@@ -233,7 +282,7 @@ nav ul li a:hover {
   margin-bottom: auto;
   border: 2px solid #000;
   padding: 10px;
-  width: 130px;
+  width: 400px;
   border-radius: 10px
   
 }
@@ -241,7 +290,7 @@ nav ul li a:hover {
   margin-left: 20px;
   margin-right: 20px;
   text-align: center;
-  align-items: center;
+  
 }
 
 .right-sidebar {
@@ -275,7 +324,24 @@ nav ul li a:hover {
   border-radius: 10px;
   
 }
+.fixture-table {
+
+  background-color: #ccc; 
+  display: grid;
+  grid-template-columns: 1fr;
+}
+.fixture {
+  border-bottom: 1px solid black; /* Możesz użyć divide-y do oddzielania wierszy */
+  color: black;
+}
+.fixture-examples {
+  background-color: white;
+}
 
 
 
 </style>
+
+<script>
+
+</script>

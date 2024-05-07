@@ -4,6 +4,8 @@ import LoginView from '@/views/LoginView.vue'
 import RegisterView from '@/views/RegisterView.vue'
 import ScoreView from '@/views/ScoreView.vue'
 import CommentView from '@/views/CommentView.vue'
+import MeczView from '@/views/MeczView.vue'
+
 
 
 const router = createRouter({
@@ -13,6 +15,11 @@ const router = createRouter({
       path: '/',
       name: 'home',
       component: HomeView
+    },
+    {
+      path: '/mecz/:matchID',
+      name: 'mecz',
+      component: MeczView
     },
     {
       path: '/Login',
