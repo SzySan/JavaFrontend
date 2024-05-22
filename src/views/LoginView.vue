@@ -4,7 +4,7 @@
       <router-link to="/" class="logo">
         <img src="@/assets/dope.jpg" alt="Logo" class="logo-img"/>
       </router-link>
-      <div class="napis">DOPE SCORE</div>
+      <div class="napis"></div>
     </div>
   </header>
   <div class="login-container">

@@ -1,14 +1,13 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
-import { fetchFixtures } from './fetch-data';
-
-import LoginView from './views/LoginView.vue';
-import RegisterView from './views/RegisterView.vue';
-import HomeView from './views/HomeView.vue';
-import MeczView from './views/MeczView.vue';
 
 
-  
+import { watch } from 'vue';
+
+
+ 
+
+   
 
 </script>
 

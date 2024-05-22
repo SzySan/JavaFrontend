@@ -65,9 +65,9 @@ defineProps({
           </div>
         </div>
         <div class="przyklad">
-          <span>Dupa</span>
-          <span>Cyce</span>
-          <span>Wadowice</span>
+          <span></span>
+          <span></span>
+          <span></span>
         </div>
       </div>
     </div>

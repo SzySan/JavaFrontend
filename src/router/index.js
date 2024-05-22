@@ -5,6 +5,9 @@ import RegisterView from '@/views/RegisterView.vue'
 import ScoreView from '@/views/ScoreView.vue'
 import CommentView from '@/views/CommentView.vue'
 import MeczView from '@/views/MeczView.vue'
+import PremierView from '@/views/leagues/PremierView.vue'
+
+
 
 
 
@@ -42,6 +45,12 @@ const router = createRouter({
       component: CommentView
       
     },
+    {
+      path: '/leagues/PremierLeague',
+      name: 'PremierLeague',
+      component: PremierView
+      
+    }
     
     
   ]

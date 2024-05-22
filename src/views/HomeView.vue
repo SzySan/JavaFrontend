@@ -1,15 +1,9 @@
 <script setup>
-import { onMounted } from 'vue';
-// import { fetchFixtures } from '@/fetch-data';
-import { data } from '@/lib/dummy-data';
+import { onMounted, onUnmounted, ref } from 'vue';
+import { fetchFixtures } from '@/fetch-data';
 import { RouterLink } from 'vue-router';
-import { useRoute } from 'vue-router';
-
-
-const route = useRoute();
-
-
-
+import { data } from '@/lib/dummy-data';
+import { PremierLeague } from '@/lib/leagueData';
 
 defineProps({
   msg: {
@@ -18,16 +12,60 @@ defineProps({
   }
 });
 
+const fixtures = ref([]);
+
+const fetchAndUpdateFixtures = async () => {
+  try {
+    
+    fixtures.value = await fetchFixtures();
+  } catch (error) {
+    console.error('Wystąpił błąd podczas pobierania danych:', error);
+  }
+};
 
 
-// const fetchData = async () => {
-//     const fixtures = await fetchFixtures();
-//     console.log(fixtures);
-//   };
+let intervalId = null;
+onMounted(() => {
+  fetchAndUpdateFixtures();
+  intervalId = setInterval(fetchAndUpdateFixtures, 30000);
+});
 
-//   onMounted(() => {
-//     fetchData();
-//   });
+onUnmounted(() => {
+  clearInterval(intervalId);
+});
+</script>
+<script>
+
+export default {
+  data() {
+    return {
+      leagues: []
+    };
+  },
+  mounted() {
+    this.fetchLeagues();
+  },
+  methods: {
+    async fetchLeagues() {
+      try {
+        const response = await fetch('https://api-football-v1.p.rapidapi.com/v3/leagues', {
+          method: 'GET',
+          headers: {
+            'X-RapidAPI-Key': 'c84734c28cmsh9c2b59a00998450p1db8cdjsnfd1ce8ad77b4',
+            'X-RapidAPI-Host': 'api-football-v1.p.rapidapi.com'
+          }
+        });
+        const result = await response.json();
+        this.leagues = result.response;
+        
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    getLeagueLogo(league) {
+    }
+  }
+}
 </script>
 
 <template>
@@ -37,8 +75,9 @@ defineProps({
         <img src="@/assets/dope.jpg" alt="Logo" class="logo" />
         <nav>
           <ul>
-            <RouterLink to="/Score" class="white-link">Wyniki</RouterLink>
+            <RouterLink to="/Score" class="white-link">Wiadomości</RouterLink>
             <RouterLink to="/Comment" class="white-link">Komentarze</RouterLink>
+            <RouterLink to="/League" class="white-link">Ligi</RouterLink>
           </ul>
         </nav>
       </div>
@@ -66,10 +105,10 @@ defineProps({
         <div class="leagues-display">
           <div class="display">
             <div class="display-container">
-              <span>Premier League</span>
-              <span>La Liga</span>
-              <span>Ekstraklasa</span>
-              <span>Ligue 1</span>
+              <div v-for="league in PremierLeague.response" :key="league.id" class="leagueName">
+                <img :src="PremierLeague.response[0].league.logo" alt="Premier League Logo" class="league-logo">
+                <RouterLink to="/leagues/PremierLeague">{{PremierLeague.response[0].league.name}}</RouterLink>
+              </div>
             </div>
           </div>
         </div>
@@ -80,7 +119,7 @@ defineProps({
               <span>WYNIKI</span>
               <div class="fixture-table">
                 <div v-for="fixture in data.response" :key="fixture.id" class="fixture">
-                  <RouterLink :to="`/mecz/${fixture.fixture.id}`" :key="fixture.fixture.id">
+                  <RouterLink :to="`/mecz/${fixture.fixture.id}`">
                   <div class="fixture-examples">
                     <div style="align-items: center;">
                       <img :src="fixture.league.logo" style="width: 30px;" :alt="fixture.league.name" />
@@ -114,18 +153,24 @@ defineProps({
           </div>
         </div>
         <div class="przyklad">
-          <span>Dupa</span>
-          <span>Cyce</span>
-          <span>Wadowice</span>
+          <RouterLink to="/Score" class="black-link">Z ostatniej chwili Lewandowski zmarzł!!!!!!!!!!! :o</RouterLink>
+          <RouterLink to="/Score"><img src="@/assets/rupert.png" alt="Logo" class="logo" /></RouterLink>
+          <RouterLink to="/Score" class="black-link">Messi nie szyje!!!!!</RouterLink>
+          <RouterLink to="/Score"><img src="@/assets/mesi.png" alt="Logo" class="logo" /></RouterLink>
+          <RouterLink to="/Score" class="black-link">Mati Borek pokazał swoje kopyto!!!!!</RouterLink>
+          <RouterLink to="/Score"><img src="@/assets/poteznybor.png" alt="Logo" class="logo" /></RouterLink>
+          <RouterLink to="/Score" class="black-link">Derby dla Lechii !!!</RouterLink>
+          <RouterLink to="/Score"><img src="@/assets/derby.jpg" alt="Logo" class="logo" /></RouterLink>
+          <RouterLink to="/Score" class="black-link">Arsenal Mistrzem... Prawie!!!!</RouterLink>
+          <RouterLink to="/Score"><img src="@/assets/arsenal.jpg" alt="Logo" class="logo" /></RouterLink>
         </div>
       </div>
     </div>
     
-    <main>
-      <!-- Tutaj umieść swoje treści -->
-    </main>
-    
+  
   </div>
+
+    
 </template>
 
 <style scoped>
@@ -134,13 +179,13 @@ body, h1, h2, h3, p, ul, li {
   padding: 0;
 }
 
-/* Ustawienie nagłówka na całą szerokość strony */
+
 header {
   width: 100%;
   background-color: #222823;
 }
 
-/* Stylizacja nagłówka */
+
 header {
   display: flex;
   align-items: center;
@@ -247,14 +292,14 @@ nav ul li a:hover {
 }
 
 .leagues {
-  /* Odsunięcie od marginesu */
+  
   margin-left: 20px;
   margin-right: 20px;
   text-align: center;
   
 }
 .display span {
-  display: block; /* Ustawienie spanów pod sobą */
+  display: block; 
 }
 .display-container{
   text-align: center;
@@ -264,12 +309,12 @@ nav ul li a:hover {
 }
 .main-content {
   display: flex;
-  height: 100vh; /* Ustawienie wysokości na 100% widocznego obszaru okna przeglądarki */
+  height: 100vh; 
 }
 
 .middle-bar {
-  flex-grow: 1; /* Rozciągnięcie środkowego panelu, aby wypełnił dostępną przestrzeń */
-  justify-content: center; /* Wyrównanie do środka */
+  flex-grow: 1; 
+  justify-content: center; 
   border:  1px solid black;
   justify-content: center;
   
@@ -294,10 +339,9 @@ nav ul li a:hover {
 }
 
 .right-sidebar {
-  
   flex-direction: column;
-  width: 250px; /* Opcjonalnie, szerokość lewego panelu */
-  border-right: 1px solid #ccc; /* Dodanie krawędzi po prawej stronie */
+  width: 250px; 
+  border-right: 1px solid #ccc; 
   border:  1px solid black;
   
 }
@@ -322,6 +366,7 @@ nav ul li a:hover {
   padding: 10px;
   width: 130px;
   border-radius: 10px;
+  margin-top: 20px;
   
 }
 .fixture-table {
@@ -331,17 +376,19 @@ nav ul li a:hover {
   grid-template-columns: 1fr;
 }
 .fixture {
-  border-bottom: 1px solid black; /* Możesz użyć divide-y do oddzielania wierszy */
+  border-bottom: 1px solid black; 
   color: black;
 }
 .fixture-examples {
   background-color: white;
 }
-
-
+.przyklad .black-link{
+  display: block;
+    margin-bottom: 10px;
+}
+.league-logo {
+  width: 30px;
+  height: auto;
+}
 
 </style>
-
-<script>
-
-</script>
