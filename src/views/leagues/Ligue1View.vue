@@ -1,16 +1,16 @@
 <script setup>
 import { ref, onMounted } from 'vue'
-import { PremierLeagueStandings } from '@/lib/leagueData'
-import { PremierLeagueTopScorer } from '@/lib/leagueData'
+import { Ligue1Standings } from '@/lib/Ligue1'
+import { Ligue1TopScorers } from '@/lib/Ligue1'
 
 const standings = ref([])
 const topScorers = ref([])
 
 onMounted(() => {
-  standings.value = PremierLeagueStandings.response[0].league.standings[0]
+  standings.value = Ligue1Standings.response[0].league.standings[0]
 })
 onMounted(() => {
-  topScorers.value = PremierLeagueTopScorer.response.map((player) => ({
+  topScorers.value = Ligue1TopScorers.response.map((player) => ({
     rank: player.statistics[0].team.id,
     name: `${player.player.firstname} ${player.player.lastname}`,
     team: player.statistics[0].team.name,
@@ -66,7 +66,7 @@ onMounted(() => {
       <div class="table-container">
         <div class="table-name">
           <div class="name">
-            <span>Premier League</span>
+            <span>Ligue 1</span>
           </div>
           <div class="season">
             <span>2023/2024</span>

@@ -62,12 +62,6 @@ Chcemy jednak uspokoić wszystkich - nie chodzi tutaj o żadne poważne konsekwe
 SZOK! Messi nie szyje! Sprawdź, Co Się Stało! 🚨
 To, co wydarzyło się niedawno, wprawiło wszystkich w osłupienie! Lionel Messi, którego talent do gry w piłkę nożną zna cały świat, postanowił zawiesić swoją niespodziewaną pasję do... szycia! Tak, dobrze słyszycie! Nasz ulubiony gwiazdor, który od jakiegoś czasu zaskakiwał wszystkich swoimi umiejętnościami krawieckimi, nagle zrezygnował z tego zajęcia. Co go do tego skłoniło?
             </textarea>
-            <img src="@/assets/poteznybor.png" alt="Logo" class="logo" />
-            <textarea>
-Mati Borek Otwiera Kartę Tajemnic: Pokazał Kopyto! 🐎🤯
-Ostatnie doniesienia zaskakują fanów sportu na całym świecie! Mati Borek, znany i ceniony dziennikarz sportowy, postanowił rzucić światło na jedną z najbardziej tajemniczych stron jego życia. Co takiego zrobił? Otworzył się jak nigdy dotąd i zdecydował się... pokazać swoje kopyto!
-Tak, właśnie przeczytałeś dobrze! Ten niezwykły krok spotkał się z szerokim zainteresowaniem i zaciekawieniem fanów, którzy zastanawiają się, co jeszcze może być ukryte w tajemniczej przeszłości tego wybitnego dziennikarza. Co za historia kryje się za tym niezwykłym gestem? Jakie są tajemnice Matiego Borka? Czy kopyto to tylko wierzchołek góry lodowej?
-            </textarea>
             <img src="@/assets/derby.jpg" alt="Logo" class="logo2" />
             <textarea>
 Lechia Gdańsk po raz kolejny udowodniła swoją przewagę nad Arką w emocjonującym starciu derbowym Trójmiasta. Mimo niekorzystnej sytuacji, gdy jednego z ich graczy usunięto z boiska w 30. minucie, Lechia zachowała kontrolę nad grą i ostatecznie sięgnęła po zasłużone zwycięstwo. To nie tylko dowód na jakość piłkarską Lechii, ale także na ich silny charakter i zdolność do radzenia sobie z trudnościami. Ich determinacja przyniosła im kolejne triumfujące chwile na arenie lokalnych derbów.

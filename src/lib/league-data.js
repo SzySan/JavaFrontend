@@ -9,9 +9,9 @@ export const fetchLeague = async (id) => {
     };
 
     try {
-        const odczyt = await fetch(url, options);
-        const result = await odczyt.json();
-        return result.odczyt
+        const response = await fetch(url, options);
+        const result = await response.json();
+        return result.response
     } catch (error) {
         console.error(error);
         return [];
